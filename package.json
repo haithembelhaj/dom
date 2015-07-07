@@ -1,0 +1,32 @@
+{
+  "name": "dom",
+  "version": "0.0.1",
+  "description": "DOM library for creating, diffing and patching dom nodes",
+  "main": "index.js",
+  "scripts": {
+    "test": " karma start karma.conf.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/haithembelhaj/dom.git"
+  },
+  "keywords": [
+    "dom",
+    "diff",
+    "patch"
+  ],
+  "devDependencies": {
+    "babelify": "*",
+    "karma": "*",
+    "karma-browserify": "*",
+    "karma-chrome-launcher": "*",
+    "karma-mocha": "*",
+    "karma-mocha-reporter": "*",
+    "karma-phantomjs-launcher": "*",
+    "karma-sinon-chai": "*",
+    "mocha": "*",
+    "phantomjs": "*"
+  },
+  "author": "Haithem Bel Haj <haythem.belhaj@gmail.com> (http://haithembelhaj.github.io)",
+  "license": "ISC"
+}
