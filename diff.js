@@ -21,7 +21,7 @@ function diff(a, b) {
 
     if (a.isEqualNode(b)) {
         return diffProperties(a, b).concat(diffChildren(a, b));
-    }if (a.tagName !== b.tagName) {
+    }if (a.nodeType !== b.nodeType || a.tagName !== b.tagName) {
         return [new _Patch.Patch(_Patch.Patch.REPLACE, a, b)];
     }return diffAttributes(a, b).concat(diffProperties(a, b)).concat(diffChildren(a, b));
 }
@@ -38,7 +38,9 @@ function diffAttributes(a, b) {
 
         if (attr in bAttrs) {
 
-            patches.push(new _Patch.Patch(_Patch.Patch.CHANGEATTRIBUTE, a, attr, bAttrs[attr]));
+            var bValue = bAttrs[attr];
+
+            if (bValue !== aAttrs[attr]) patches.push(new _Patch.Patch(_Patch.Patch.CHANGEATTRIBUTE, a, attr, bValue));
 
             delete bAttrs[attr];
         } else {
@@ -107,6 +109,8 @@ function diffChildren(a, b) {
         }
     });
 
+    var Remaining = [].concat(bRemaining);
+
     aRemaining.forEach(function (aChild, aI) {
 
         var bChild = bRemaining[aI];
@@ -115,10 +119,10 @@ function diffChildren(a, b) {
 
         patches = patches.concat(diff(aChild, bChild));
 
-        _getChildNodes$getAttributes$getNodeIndex$without.without(bRemaining, bChild);
+        _getChildNodes$getAttributes$getNodeIndex$without.without(Remaining, bChild);
     });
 
-    bRemaining.forEach(function (bChild) {
+    Remaining.forEach(function (bChild) {
 
         patches.push(new _Patch.Patch(_Patch.Patch.INSERT, a, bChild, -1));
     });
