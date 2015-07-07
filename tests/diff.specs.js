@@ -78,5 +78,32 @@ describe('Diff Specs', ()=> {
     });
 
 
+    it('should handle text nodes correctly', ()=> {
+
+        let tree = dom.div([
+
+            dom.text(''),
+            dom.div({'class':'container'},[
+               dom.div()
+            ]),
+            dom.text('')
+        ]);
+
+        let modTree = dom.div([
+
+            dom.text(''),
+            dom.div({'class':'container'},[
+                dom.div(),
+                dom.div()
+            ]),
+            dom.text('')
+        ]);
+
+        let patches = diff(tree, modTree);
+
+        expect(patches[0].operation).to.equal(Patch.INSERT);
+        expect(patches[0].args[2]).to.equal(-1);
+    });
+
 
 });

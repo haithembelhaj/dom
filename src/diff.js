@@ -15,7 +15,7 @@ export function diff(a,b){
     if(a.isEqualNode(b))
         return diffProperties(a,b).concat(diffChildren(a,b));
 
-    if(a.tagName !== b.tagName)
+    if(a.nodeType !== b.nodeType || a.tagName !== b.tagName)
         return [new Patch(Patch.REPLACE, a, b)];
 
 
@@ -31,12 +31,14 @@ function diffAttributes(a, b){
     let aAttrs = getAttributes(a);
     let bAttrs = getAttributes(b);
 
-
     Object.keys(aAttrs).forEach(function(attr){
 
         if(attr in bAttrs){
 
-            patches.push(new Patch(Patch.CHANGEATTRIBUTE, a, attr, bAttrs[attr]));
+            let bValue = bAttrs[attr];
+
+            if(bValue !== aAttrs[attr])
+                patches.push(new Patch(Patch.CHANGEATTRIBUTE, a, attr, bValue));
 
             delete bAttrs[attr];
 
@@ -87,6 +89,7 @@ function diffChildren(a, b){
     let aRemaining = [].concat(aChilds);
     let bRemaining = [].concat(bChilds);
 
+
     // elements with ids are special
     aChilds.forEach(function(aChild ,aI){
 
@@ -111,6 +114,8 @@ function diffChildren(a, b){
 
     });
 
+    let Remaining = [].concat(bRemaining);
+
     aRemaining.forEach(function(aChild ,aI){
 
         let bChild = bRemaining[aI];
@@ -120,10 +125,10 @@ function diffChildren(a, b){
 
         patches = patches.concat(diff(aChild, bChild));
 
-        without(bRemaining, bChild);
+        without(Remaining, bChild);
     });
 
-    bRemaining.forEach(function(bChild){
+    Remaining.forEach(function(bChild){
 
         patches.push(new Patch(Patch.INSERT, a, bChild, -1));
     });
