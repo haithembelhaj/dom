@@ -2,9 +2,10 @@
   "name": "dom",
   "version": "0.0.1",
   "description": "DOM library for creating, diffing and patching dom nodes",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
-    "test": " karma start karma.conf.js"
+    "test": "karma start karma.conf.js",
+    "install": "./node_modules/babel/bin/babel/index.js src --out-dir lib --source-maps inline"
   },
   "repository": {
     "type": "git",
@@ -16,6 +17,7 @@
     "patch"
   ],
   "devDependencies": {
+    "babel": "*",
     "babelify": "*",
     "karma": "*",
     "karma-browserify": "*",
