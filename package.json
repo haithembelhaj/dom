@@ -4,7 +4,7 @@
   "description": "DOM library for creating, diffing and patching dom nodes",
   "main": "lib/index.js",
   "scripts": {
-    "test": "karma start karma.conf.js",
+    "test": "karma start karma.conf.js"
   },
   "repository": {
     "type": "git",
