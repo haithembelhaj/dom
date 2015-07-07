@@ -17,7 +17,6 @@
     "patch"
   ],
   "devDependencies": {
-    "babel": "*",
     "babelify": "*",
     "karma": "*",
     "karma-browserify": "*",
@@ -30,5 +29,8 @@
     "phantomjs": "*"
   },
   "author": "Haithem Bel Haj <haythem.belhaj@gmail.com> (http://haithembelhaj.github.io)",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "babel": "*"
+  }
 }
