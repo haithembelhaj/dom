@@ -5,7 +5,6 @@
   "main": "lib/index.js",
   "scripts": {
     "test": "karma start karma.conf.js",
-    "postinstall": "./node_modules/babel/bin/babel/index.js src --out-dir lib --source-maps inline"
   },
   "repository": {
     "type": "git",
@@ -17,6 +16,7 @@
     "patch"
   ],
   "devDependencies": {
+    "babel": "*",
     "babelify": "*",
     "karma": "*",
     "karma-browserify": "*",
@@ -29,8 +29,5 @@
     "phantomjs": "*"
   },
   "author": "Haithem Bel Haj <haythem.belhaj@gmail.com> (http://haithembelhaj.github.io)",
-  "license": "ISC",
-  "dependencies": {
-    "babel": "*"
-  }
+  "license": "ISC"
 }
