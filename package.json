@@ -5,7 +5,7 @@
   "main": "lib/index.js",
   "scripts": {
     "test": "karma start karma.conf.js",
-    "install": "./node_modules/babel/bin/babel/index.js src --out-dir lib --source-maps inline"
+    "postinstall": "./node_modules/babel/bin/babel/index.js src --out-dir lib --source-maps inline"
   },
   "repository": {
     "type": "git",
