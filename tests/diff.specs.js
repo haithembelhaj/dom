@@ -70,11 +70,11 @@ describe('Diff Specs', ()=> {
 
         let patches = diff(tree, modTree);
 
-        expect(patches[0].operation).to.equal(Patch.INSERT);
-        expect(patches[0].args[2]).to.equal(0);
+        expect(patches[3].operation).to.equal(Patch.INSERT);
+        expect(patches[3].args[2]).to.equal(0);
 
-        expect(patches[1].operation).to.equal(Patch.INSERT);
-        expect(patches[1].args[2]).to.equal(4);
+        expect(patches[4].operation).to.equal(Patch.INSERT);
+        expect(patches[4].args[2]).to.equal(4);
     });
 
 

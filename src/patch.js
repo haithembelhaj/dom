@@ -1,5 +1,5 @@
 
-import {getChildAtIndex} from './utils';
+import {getChildAtIndex, getNodeIndex} from './utils';
 
 /**
  * Patch Class
@@ -27,24 +27,28 @@ Patch.CHANGEPROPERTY = 'CHANGEPROPERTY';
  *
  * @param patches
  */
-export function patch(patches){
+export function patch(node, patches){
 
-    sortInserts(patches).forEach(patchNode);
-}
+    let parent = node.parentNode;
 
-function sortInserts(patches){
+    if(parent){
 
-    return patches.sort(function(patchA, patchB){
+        let index = getNodeIndex(node);
+        let frag = document.createDocumentFragment();
 
-        if(patchA.operation === Patch.INSERT && patchB.operation === Patch.INSERT){
+        frag.appendChild(node);
 
-            return patchA.args[1] - patchB.args[1];
+        patches.forEach(patchNode);
 
-        } else {
+        parent.insertBefore(frag, getChildAtIndex(index))
 
-            return 0;
-        }
-    }).reverse()
+    }else{
+
+        patches.forEach(patchNode);
+    }
+
+
+    return node;
 }
 
 

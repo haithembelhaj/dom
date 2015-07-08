@@ -32,7 +32,7 @@ describe('Patch Specs', ()=> {
 
         let patches = diff(tree, modTree.cloneNode(true));
 
-        patch(patches);
+        patch(tree, patches);
 
         expect(tree.isEqualNode(modTree)).to.be.true;
     });

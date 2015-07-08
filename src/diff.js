@@ -88,14 +88,15 @@ function diffChildren(a, b){
     let bChilds = getChildNodes(b);
     let aRemaining = [].concat(aChilds);
     let bRemaining = [].concat(bChilds);
+    let insertPatches = [];
 
 
-    // elements with ids are special
+        // elements with ids are special
     aChilds.forEach(function(aChild ,aI){
 
         if(aChild.id && b.querySelector){
 
-            let similar = b.querySelector('#'+aChild.id);
+            let similar = b.querySelector(`[id="${aChild.id}"]`);
 
             if(similar) {
 
@@ -104,7 +105,7 @@ function diffChildren(a, b){
                 patches = patches.concat(diff(aChild, similar));
 
                 if (index !== aI) {
-                    patches.push(new Patch(Patch.INSERT, a, aChild, index))
+                    insertPatches.push(new Patch(Patch.INSERT, a, aChild, index));
                 }
 
                 without(aRemaining, aChild);
@@ -133,5 +134,5 @@ function diffChildren(a, b){
         patches.push(new Patch(Patch.INSERT, a, bChild, -1));
     });
 
-    return patches;
+    return patches.concat(insertPatches);
 }
