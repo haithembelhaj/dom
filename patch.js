@@ -15,7 +15,7 @@ Object.defineProperty(exports, '__esModule', {
  */
 exports.patch = patch;
 
-var _getChildAtIndex = require('./utils');
+var _getChildAtIndex$getNodeIndex = require('./utils');
 
 /**
  * Patch Class
@@ -42,23 +42,26 @@ Patch.ADDATTRIBUTE = 'ADDATTRIBUTE';
 Patch.REMOVEATTRIBUTE = 'REMOVEATTRIBUTE';
 Patch.CHANGEATTRIBUTE = 'CHANGEATTRIBUTE';
 Patch.CHANGEPROPERTY = 'CHANGEPROPERTY';
-function patch(patches) {
+function patch(node, patches) {
 
-    sortInserts(patches).forEach(patchNode);
-}
+    var parent = node.parentNode;
 
-function sortInserts(patches) {
+    if (parent) {
 
-    return patches.sort(function (patchA, patchB) {
+        var index = _getChildAtIndex$getNodeIndex.getNodeIndex(node);
+        var frag = document.createDocumentFragment();
 
-        if (patchA.operation === Patch.INSERT && patchB.operation === Patch.INSERT) {
+        frag.appendChild(node);
 
-            return patchA.args[1] - patchB.args[1];
-        } else {
+        patches.forEach(patchNode);
 
-            return 0;
-        }
-    }).reverse();
+        parent.insertBefore(frag, _getChildAtIndex$getNodeIndex.getChildAtIndex(index));
+    } else {
+
+        patches.forEach(patchNode);
+    }
+
+    return node;
 }
 
 function patchNode(_ref) {
@@ -110,7 +113,7 @@ function replace(nodeA, nodeB) {
 function insert(parent, node, index) {
 
     if (index !== -1) {
-        return parent && parent.removeChild(node) && parent.insertBefore(node, _getChildAtIndex.getChildAtIndex(parent, index));
+        return parent && parent.removeChild(node) && parent.insertBefore(node, _getChildAtIndex$getNodeIndex.getChildAtIndex(parent, index));
     }parent && parent.appendChild(node);
 }
 

@@ -85,13 +85,14 @@ function diffChildren(a, b) {
     var bChilds = _getChildNodes$getAttributes$getNodeIndex$without.getChildNodes(b);
     var aRemaining = [].concat(aChilds);
     var bRemaining = [].concat(bChilds);
+    var insertPatches = [];
 
     // elements with ids are special
     aChilds.forEach(function (aChild, aI) {
 
         if (aChild.id && b.querySelector) {
 
-            var similar = b.querySelector('#' + aChild.id);
+            var similar = b.querySelector('[id="' + aChild.id + '"]');
 
             if (similar) {
 
@@ -100,7 +101,7 @@ function diffChildren(a, b) {
                 patches = patches.concat(diff(aChild, similar));
 
                 if (index !== aI) {
-                    patches.push(new _Patch.Patch(_Patch.Patch.INSERT, a, aChild, index));
+                    insertPatches.push(new _Patch.Patch(_Patch.Patch.INSERT, a, aChild, index));
                 }
 
                 _getChildNodes$getAttributes$getNodeIndex$without.without(aRemaining, aChild);
@@ -127,5 +128,5 @@ function diffChildren(a, b) {
         patches.push(new _Patch.Patch(_Patch.Patch.INSERT, a, bChild, -1));
     });
 
-    return patches;
+    return patches.concat(insertPatches);
 }
