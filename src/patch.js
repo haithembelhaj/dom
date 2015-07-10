@@ -40,7 +40,7 @@ export function patch(node, patches){
 
         patches.forEach(patchNode);
 
-        parent.insertBefore(frag, getChildAtIndex(index))
+        parent.insertBefore(frag, getChildAtIndex(parent, index))
 
     }else{
 

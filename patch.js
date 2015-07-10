@@ -55,7 +55,7 @@ function patch(node, patches) {
 
         patches.forEach(patchNode);
 
-        parent.insertBefore(frag, _getChildAtIndex$getNodeIndex.getChildAtIndex(index));
+        parent.insertBefore(frag, _getChildAtIndex$getNodeIndex.getChildAtIndex(parent, index));
     } else {
 
         patches.forEach(patchNode);
