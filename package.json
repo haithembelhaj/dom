@@ -1,8 +1,8 @@
 {
   "name": "dom",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "DOM library for creating, diffing and patching dom nodes",
-  "main": "lib/index.js",
+  "main": "index.js",
   "scripts": {
     "test": "karma start karma.conf.js"
   },

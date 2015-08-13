@@ -1,0 +1,23 @@
+{
+  "name": "dom",
+  "main": "dist/dom.js",
+  "version": "0.0.2",
+  "homepage": "https://github.com/haithembelhaj/dom",
+  "authors": [
+    "Haithem Bel Haj <haythem.belhaj@gmail.com>"
+  ],
+  "description": "DOM library for creating, diffing and patching dom nodes",
+  "keywords": [
+    "DOM",
+    "diff",
+    "patch"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
